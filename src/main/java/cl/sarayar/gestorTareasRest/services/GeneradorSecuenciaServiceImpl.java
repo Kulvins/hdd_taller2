@@ -25,12 +25,7 @@ public class GeneradorSecuenciaServiceImpl implements GeneradorSecuenciaService 
 	
 	@Override
 	public long generadorSecuencia(String nombre) {
-		
-		Secuencia secuencia = mongoOperations.findAndModify(query(where("_id").is(nombre)),
-			      new Update().inc("seq",1), options().returnNew(true).upsert(true),
-			      Secuencia.class);
+		Secuencia secuencia = mongoOperations.findAndModify(query(where("_id").is(nombre)), new Update().inc("seq",1), options().returnNew(true).upsert(true), Secuencia.class);
 			    return !Objects.isNull(secuencia) ? secuencia.getSeq() : 1;
 	}
-
-	
 }

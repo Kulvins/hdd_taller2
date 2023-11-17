@@ -26,15 +26,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @RequestMapping("/usuarios")
 public class UsuariosController {
 
+
+	private UsuariosService usService;
+
 	@Autowired
-	UsuariosService usService;
+	public UsuariosController(UsuariosService usService) {
+		this.usService = usService;
+	}
 	@Autowired
 	JwtUtils jwtUtils;
 
 	@PostMapping("/login")
 	public ResponseEntity<?> authenticateUser(@RequestBody Usuario usuario) {
-
-
 		return ResponseEntity.ok(usuario);
 	}
 
